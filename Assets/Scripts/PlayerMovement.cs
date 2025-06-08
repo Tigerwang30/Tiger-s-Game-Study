@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Rigidbody2D rb;
     public float moveSpeed;
     [SerializeField] private Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
-        transform.position += moveInput * moveSpeed * Time.deltaTime;
+        rb.linearVelocity = moveInput * moveSpeed;
         if (moveInput.sqrMagnitude > 0){
             animator.SetBool("isRunning", true);
         } else {
